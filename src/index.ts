@@ -1,4 +1,4 @@
-import axios from './core/dispatchRequest'
+import axios from './axios'
 
 export * from './types'
 

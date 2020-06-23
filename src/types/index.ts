@@ -5,7 +5,7 @@ export interface AxiosRequestConfig {
   params?: any
   headers?: any
   responseType?: XMLHttpRequestResponseType
-  timeout? :number
+  timeout?: number
 }
 
 export type Method =
@@ -53,14 +53,16 @@ export interface Axios {
   head(url: string, config?: AxiosRequestConfig): AxiosPromise
 
   options(url: string, config?: AxiosRequestConfig): AxiosPromise
-  
+
   post(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise
-  
+
   put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise
-  
+
   patch(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise
 }
 
 export interface AxiosInstance extends Axios {
   (config: AxiosRequestConfig): AxiosPromise
+
+  (url: string, config?: AxiosRequestConfig): AxiosPromise
 }
