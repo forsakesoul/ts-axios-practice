@@ -44,3 +44,32 @@ axios('/extend/post', {
     msg: 'hello'
   }
 })
+
+
+// 定义接口泛型
+// 泛型接口
+interface ResponseData<T = any> {
+  code: number
+  result: T
+  message: string
+}
+
+interface User {
+  name: string
+  age: number
+}
+
+function getUser<T>() {
+  return axios<ResponseData<T>>('/extend/user')
+    .then(res => res.data)
+    .catch(error => console.error(error))
+}
+
+async function test() {
+  const user = await getUser<User>()
+  if (user) {
+    console.log(user.result.name)
+  }
+}
+
+test()
