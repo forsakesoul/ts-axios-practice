@@ -31,6 +31,10 @@ export default class Axios {
     return this.requestMethodWithData('post', url, data, config)
   }
 
+  options(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
+    return this.requestMethodWithData('options', url, data, config)
+  }
+
   put(url: string, data?: any, config?: AxiosRequestConfig): AxiosPromise {
     return this.requestMethodWithData('put', url, data, config)
   }
