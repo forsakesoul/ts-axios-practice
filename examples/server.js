@@ -22,6 +22,7 @@ registerSimpleRouter()
 registerBaseRouter()
 registerErrorRouter()
 registerExtendRouter()
+registerInterceptor()
 
 app.use(webpackHotMiddleware(compiler))
 
@@ -129,5 +130,11 @@ function registerExtendRouter () {
         age: 18
       }
     })
+  })
+}
+
+function registerInterceptor () {
+  router.get('/interceptor/get', function(req, res) {
+    res.end('hello')
   })
 }

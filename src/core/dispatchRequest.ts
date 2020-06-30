@@ -6,6 +6,7 @@ import { processHeaders } from '../helps/headers'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
+  // 将 config 转换为 response
   return xhr(config).then(res => {
     return transformResponseData(res)
   })

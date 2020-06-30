@@ -7,14 +7,13 @@ export function transformRequest(data: any): any {
   return data
 }
 
-
 // 请求时处理未指定的 responseType
 export function transformResponse(data: any): any {
   if (typeof data === 'string') {
     try {
       data = JSON.parse(data)
     } catch (error) {
-      console.log(error)
+      console.log('do anything: \n', { error })
     }
   }
   return data
