@@ -6,6 +6,8 @@ export interface AxiosRequestConfig {
   headers?: any
   responseType?: XMLHttpRequestResponseType
   timeout?: number
+
+  [propName: string]: any
 }
 
 export type Method =
@@ -44,6 +46,8 @@ export interface AxiosError extends Error {
 }
 
 export interface Axios {
+  defaults: AxiosRequestConfig
+
   interceptors: {
     request: AxiosInterceptorManger<AxiosRequestConfig>
     response: AxiosInterceptorManger<AxiosResponse>
