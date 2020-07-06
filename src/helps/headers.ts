@@ -1,4 +1,5 @@
-import { isPlainObject } from './util'
+import { isPlainObject, deepMerge } from './util'
+import { Method } from '../types'
 
 interface Headers {
   ['Content-Type']?: string
@@ -44,4 +45,19 @@ export function parseHeaders(headers: string): any {
     parsed[key] = value
   })
   return parsed
+}
+
+export function flattenHeaders(headers: any, method: Method): any {
+  if (!headers) {
+    return
+  }
+  headers = deepMerge(headers.common, headers[method], headers)
+
+  const methodsToDelete = ['delete', 'get', 'head', 'options', 'post', 'put', 'patch', 'common']
+
+  methodsToDelete.forEach(method => {
+    delete headers[method]
+  })
+
+  return headers
 }
