@@ -24,6 +24,8 @@ registerErrorRouter()
 registerExtendRouter()
 registerInterceptorRouter()
 registerConfigRouter();
+registerCancelRouter();
+
 
 app.use(webpackHotMiddleware(compiler))
 
@@ -146,5 +148,19 @@ function registerConfigRouter() {
   })
   router.post('/config/post2', function(req, res) {
     res.json(req.body)
+  })
+}
+
+
+function registerCancelRouter() {
+  router.get('/cancel/get', (req, res) => {
+    setTimeout(() => {
+      res.json(req.body)
+    }, 1000);
+  })
+  router.post('/cancel/post', (req, res) => {
+    setTimeout(() => {
+      res.json(req.body)
+    }, 1000);
   })
 }
