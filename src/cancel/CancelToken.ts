@@ -11,6 +11,7 @@ export default class CancelToken {
 
   constructor(executor: CancelExecutor) {
     let resolvePromise: ResolvePromise
+    // 触发 -> cancelToken.then()
     this.promise = new Promise<Cancel>(resolve => {
       resolvePromise = resolve
     })
