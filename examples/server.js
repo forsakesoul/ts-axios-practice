@@ -20,15 +20,12 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }))
 
+app.use(express.static(__dirname, {
+  setHeaders (res) {
+    res.cookie('XSRF-TOKEN-D', '1234abc')
+  }
+}))
 
-registerSimpleRouter()
-registerBaseRouter()
-registerErrorRouter()
-registerExtendRouter()
-registerInterceptorRouter()
-registerConfigRouter();
-registerCancelRouter();
-registerMoreRouter();
 
 app.use(webpackHotMiddleware(compiler))
 
@@ -38,6 +35,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(router)
+
+
+registerSimpleRouter()
+registerBaseRouter()
+registerErrorRouter()
+registerExtendRouter()
+registerInterceptorRouter()
+registerConfigRouter();
+registerCancelRouter();
+registerMoreRouter();
 
 const port = process.env.PORT || 8080
 module.exports = app.listen(port, () => {
