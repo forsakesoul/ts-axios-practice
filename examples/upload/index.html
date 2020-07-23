@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>file upload</title>
+  <link rel="stylesheet" href="https://unpkg.com/nprogress@0.2.0/nprogress.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+  
+  <h1>file download</h1>
+  <button id="download" type="button" class="btn btn-primary">file download</button>
+  <h1>file upload</h1>
+  <button type="button" class="btn btn-warning">file upload</button>
+  <form role="form" class="form" onsubmit="return false">
+    <input id="file" type="file" class="form-control" />
+    <button id="upload" type="button" class="btn btn-primary">Upload</button>
+  </form>
+
+  <script src="/__build__/upload.js"></script>
+</body>
+</html>

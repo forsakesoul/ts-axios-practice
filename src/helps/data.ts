@@ -12,8 +12,8 @@ export function transformResponse(data: any): any {
   if (typeof data === 'string') {
     try {
       data = JSON.parse(data)
-    } catch (error) {
-      console.log('do anything: \n', { error })
+    } catch (err) {
+      /* Ignore */
     }
   }
   return data
