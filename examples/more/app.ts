@@ -20,3 +20,15 @@ const instance = axios.create({
 instance.get('/more/get').then(res => {
   console.log(res)
 })
+
+axios.post('/more/post', {
+  a: 1
+}, {
+  // HTTP 鉴权
+  auth: {
+    username: 'Yeah',
+    password: '123456'
+  }
+}).then(res => {
+  console.log('Authorization:::', res)
+})

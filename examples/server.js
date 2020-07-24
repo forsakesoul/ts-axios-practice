@@ -7,6 +7,7 @@ const WebpackConfig = require('./webpack.config')
 const cookieParser = require('cookie-parser')
 const multipart = require('connect-multiparty')
 const path = require('path')
+const atob = require('atob')
 
 require('./server2')
 
@@ -187,6 +188,19 @@ function registerCancelRouter() {
 function registerMoreRouter() {
   router.get('/more/get', (req, res) => {
     res.json(req.cookies)
+  })
+
+  router.post('/more/post', (req, res) => {
+    const auth = req.headers.authorization
+    const [type, credentials] = auth.split(' ')
+    console.log('server: atob:::', atob(credentials))
+    const [username, password] = atob(credentials).split(':')
+    if (type === 'Basic' && username === 'Yeah' && password === '123456') {
+      res.json(req.body)
+    } else {
+      res.status(401)
+      res.end('UnAuthorization')
+    }
   })
 }
 
