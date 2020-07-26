@@ -1,4 +1,5 @@
 import axios  from '../../src/index'
+import { AxiosError } from '../../src/helps/error'
 
 // document.cookie = 'a=b'
 
@@ -31,4 +32,20 @@ axios.post('/more/post', {
   }
 }).then(res => {
   console.log('Authorization:::', res)
+})
+
+axios.get('/more/304').then(res => {
+  console.log(res)
+}).catch((e: AxiosError) => {
+  console.error(e.message)
+})
+
+axios.get('/more/304', {
+  validateStatus(status) {
+    return status >= 200 && status < 400
+  }
+}).then(res => {
+  console.log(res)
+}).catch((e: AxiosError) => {
+  console.log(e.message)
 })
