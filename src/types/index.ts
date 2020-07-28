@@ -16,6 +16,8 @@ export interface AxiosRequestConfig {
   onUploadProgress?: (e: ProgressEvent) => void
   auth?: AxiosBaseCredentials
   validateStatus?: (status: number) => boolean
+  // 自定义 URL 参数解析规则
+  paramsSerializer?: (params: any) => string
 
   [propName: string]: any
 }
