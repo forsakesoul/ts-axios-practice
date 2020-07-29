@@ -51,35 +51,42 @@ import qs from 'qs'
 //   console.log(e.message)
 // })
 
-axios.get('/more/get', {
-  params: new URLSearchParams('a=b&c=d')
-}).then(res => {
-  console.log(res)
-})
+// axios.get('/more/get', {
+//   params: new URLSearchParams('a=b&c=d')
+// }).then(res => {
+//   console.log(res)
+// })
 
-axios.get('/more/get', {
-  params: {
-    a: 1,
-    b: 2,
-    c: ['a', 'b', 'c']
-  }
-}).then(res => {
-  console.log(res)
-})
+// axios.get('/more/get', {
+//   params: {
+//     a: 1,
+//     b: 2,
+//     c: ['a', 'b', 'c']
+//   }
+// }).then(res => {
+//   console.log(res)
+// })
+
+// const instance = axios.create({
+//   paramsSerializer(params) {
+//     return qs.stringify(params, {
+//       arrayFormat: 'brackets'
+//     })
+//   }
+// })
+// instance.get('/more/get', {
+//   params: {
+//     a: 1,
+//     b: 2,
+//     c: ['a', 'b', 'c']
+//   }
+// }).then(res => {
+//   console.log(res)
+// })
 
 const instance = axios.create({
-  paramsSerializer(params) {
-    return qs.stringify(params, {
-      arrayFormat: 'brackets'
-    })
-  }
+  baseURL: 'https://img.mukewang.com/'
 })
-instance.get('/more/get', {
-  params: {
-    a: 1,
-    b: 2,
-    c: ['a', 'b', 'c']
-  }
-}).then(res => {
-  console.log(res)
-})
+
+instance.get('szimg/5f1936e0086cc1ea06000338-360-202.jpg')
+axios.get('https://www.imooc.com/static/img/index/logo-recommended.png')
