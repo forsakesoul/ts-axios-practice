@@ -85,8 +85,7 @@ import qs from 'qs'
 // })
 
 const instance = axios.create({
-  baseURL: 'https://img.mukewang.com/'
+  baseURL: 'https://img.mukewang.com/user'
 })
-
-instance.get('szimg/5f1936e0086cc1ea06000338-360-202.jpg')
-axios.get('https://www.imooc.com/static/img/index/logo-recommended.png')
+instance.get('577baef700019c4501400140-100-100.jpg')
+instance.get('https://img1.sycdn.imooc.com/szimg/5e1d990f0885d97306000338-240-180.jpg')
