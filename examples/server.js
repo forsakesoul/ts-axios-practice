@@ -54,6 +54,7 @@ registerConfigRouter();
 registerCancelRouter();
 registerMoreRouter();
 registerFileRouter();
+registerAllRouter();
 
 const port = process.env.PORT || 8080
 module.exports = app.listen(port, () => {
@@ -216,5 +217,19 @@ function registerFileRouter() {
   router.post('/more/upload', (req, res) => {
     console.log(req.body, req.files)
     res.end('upload success')
+  })
+}
+
+function registerAllRouter() {
+  router.get('/all/304', function (req, res) {
+    res.status(304)
+    res.end()
+  })
+
+  router.get('/all/A', function (req, res) {
+    res.end('A')
+  })
+  router.get('/all/B', function (req, res) {
+    res.end('B')
   })
 }
