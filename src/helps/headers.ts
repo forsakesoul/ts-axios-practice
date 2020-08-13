@@ -18,7 +18,8 @@ function normalizeHeaderName(headers: any, normalizedName: string): void {
   })
 }
 
-export function processHeaders<T>(headers: Headers, data: any): Headers {
+// TODO: 如何正确添加 undefined null 类型
+export function processHeaders(headers: Headers | void, data: any): Headers | void {
   normalizeHeaderName(headers, 'Content-Type')
 
   if (isPlainObject(data)) {
@@ -36,20 +37,20 @@ export function parseHeaders(headers: string): any {
     return parsed
   }
   headers.split('\r\n').forEach(line => {
-    let [key, value] = line.split(':')
+    let [key, ...vals] = line.split(':')
     key = key.trim().toLowerCase()
     if (!key) {
       return
     }
-    value = value && value.trim()
-    parsed[key] = value
+    const val = vals.join(':').trim()
+    parsed[key] = val
   })
   return parsed
 }
 
 export function flattenHeaders(headers: any, method: Method): any {
   if (!headers) {
-    return
+    return headers
   }
   headers = deepMerge(headers.common, headers[method], headers)
 
