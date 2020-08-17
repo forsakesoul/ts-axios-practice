@@ -45,6 +45,7 @@ export default class Axios {
 
     // 合并配置
     config = mergeConfig(this.defaults, config)
+    config.method = config.method.toLowerCase()
 
     // 添加拦截器
     const chain: PromiseChain<any>[] = [

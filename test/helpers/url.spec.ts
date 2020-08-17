@@ -33,14 +33,14 @@ describe('helpers:url', () => {
 
     test('should support object params', () => {
       expect(buildURL('/foo', { foo: { bar: 'baz' } })).toBe(
-        '/foo?=foo' + encodeURI('{"bar": "baz"}')
+        '/foo?foo=' + encodeURI('{"bar":"baz"}')
       )
     })
 
     test('should support date params', () => {
       const date = new Date()
 
-      expect(buildURL('/foo', { date: date })).toBe('/foo?date=' + date.toISOString)
+      expect(buildURL('/foo', { date: date })).toBe('/foo?date=' + date.toISOString())
     })
 
     test('should support array params', () => {
@@ -50,7 +50,7 @@ describe('helpers:url', () => {
     test('should support special char params', () => {
       expect(
         buildURL('/foo', {
-          foo: '@:$, '
+          foo: '@$, '
         })
       ).toBe('/foo?foo=@$,+')
     })
@@ -92,6 +92,7 @@ describe('helpers:url', () => {
 
     test('should return false if URL begins with invalid schema name', () => {
       expect(isAbsoluteURL('123://example.com')).toBeFalsy()
+      expect(isAbsoluteURL('!valid://example.com')).toBeFalsy()
     })
 
     test('should return true if URL is protocol-relative', () => {
@@ -104,15 +105,15 @@ describe('helpers:url', () => {
   })
   describe('combineURL', () => {
     test('should combine URL', () => {
-      expect(combineURL('https://api.github.com', '/user')).toBe('https://api.github.com/users')
+      expect(combineURL('https://api.github.com', '/users')).toBe('https://api.github.com/users')
     })
 
     test('should remove duplicate slashes', () => {
-      expect(combineURL('https://api.github.com/', '/user')).toBe('https://api.github.com/users')
+      expect(combineURL('https://api.github.com/', '/users')).toBe('https://api.github.com/users')
     })
 
     test('should insert missing slashes', () => {
-      expect(combineURL('https://api.github.com', '/ser')).toBe('https://api.github.com/users')
+      expect(combineURL('https://api.github.com', '/users')).toBe('https://api.github.com/users')
     })
 
     test('should allow a single slash for relative url', () => {

@@ -19,7 +19,7 @@ function normalizeHeaderName(headers: any, normalizedName: string): void {
 }
 
 // TODO: 如何正确添加 undefined null 类型
-export function processHeaders(headers: Headers | void, data: any): Headers | void {
+export function processHeaders(headers: Headers | null | undefined, data: any): Headers | void {
   normalizeHeaderName(headers, 'Content-Type')
 
   if (isPlainObject(data)) {
@@ -28,7 +28,7 @@ export function processHeaders(headers: Headers | void, data: any): Headers | vo
     }
   }
 
-  return headers
+  return headers!
 }
 
 export function parseHeaders(headers: string): any {
