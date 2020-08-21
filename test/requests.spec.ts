@@ -75,7 +75,6 @@ describe('requests', () => {
       request.eventBus.trigger('timeout')
 
       setTimeout(() => {
-        console.log(typeof err)
         expect(err instanceof Error).toBeTruthy()
         expect(err.message).toBe('Timeout of 2000 ms exceeded')
         done()
