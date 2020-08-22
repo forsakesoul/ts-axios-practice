@@ -248,7 +248,7 @@ describe('requests', () => {
       })
 
     return getAjaxRequest().then(request => {
-      expect(request.requestHeaders['Content-type']).toBe('application/json')
+      expect(request.requestHeaders['Content-Type']).toBe('application/json;charset=utf-8')
     })
   })
 })
