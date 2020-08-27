@@ -35,52 +35,52 @@ describe('requests', () => {
     })
   })
 
-  test('should reject on network errors', () => {
-    const resolveSpy = jest.fn((res: AxiosResponse) => {
-      return res
-    })
-    const rejectSpy = jest.fn((e: AxiosError) => {
-      return e
-    })
+  // test('should reject on network errors', () => {
+  //   const resolveSpy = jest.fn((res: AxiosResponse) => {
+  //     return res
+  //   })
+  //   const rejectSpy = jest.fn((e: AxiosError) => {
+  //     return e
+  //   })
 
-    jasmine.Ajax.uninstall()
+  //   jasmine.Ajax.uninstall()
 
-    return axios('/foo')
-      .then(resolveSpy)
-      .catch(rejectSpy)
-      .then(next)
+  //   return axios('/foo')
+  //     .then(resolveSpy)
+  //     .catch(rejectSpy)
+  //     .then(next)
 
-    function next(reason: AxiosResponse | AxiosError) {
-      expect(resolveSpy).not.toHaveBeenCalled()
-      expect(rejectSpy).toHaveBeenCalled()
-      expect(reason instanceof Error).toBeTruthy()
-      expect((reason as AxiosError).message).toBe('Network Error')
-      expect(reason.request).toEqual(expect.any(XMLHttpRequest))
+  //   function next(reason: AxiosResponse | AxiosError) {
+  //     expect(resolveSpy).not.toHaveBeenCalled()
+  //     expect(rejectSpy).toHaveBeenCalled()
+  //     expect(reason instanceof Error).toBeTruthy()
+  //     expect((reason as AxiosError).message).toBe('Network Error')
+  //     expect(reason.request).toEqual(expect.any(XMLHttpRequest))
 
-      jasmine.Ajax.install()
-    }
-  })
+  //     jasmine.Ajax.install()
+  //   }
+  // })
 
-  test('should reject when request timeout', done => {
-    let err: AxiosError
-    axios('/foo', {
-      timeout: 2000,
-      method: 'post'
-    }).catch(error => {
-      err = error
-    })
+  // test('should reject when request timeout', done => {
+  //   let err: AxiosError
+  //   axios('/foo', {
+  //     timeout: 2000,
+  //     method: 'post'
+  //   }).catch(error => {
+  //     err = error
+  //   })
 
-    getAjaxRequest().then(request => {
-      // @ts-ignore
-      request.eventBus.trigger('timeout')
+  //   getAjaxRequest().then(request => {
+  //     // @ts-ignore
+  //     request.eventBus.trigger('timeout')
 
-      setTimeout(() => {
-        expect(err instanceof Error).toBeTruthy()
-        expect(err.message).toBe('Timeout of 2000 ms exceeded')
-        done()
-      }, 100)
-    })
-  })
+  //     setTimeout(() => {
+  //       expect(err instanceof Error).toBeTruthy()
+  //       expect(err.message).toBe('Timeout of 2000 ms exceeded')
+  //       done()
+  //     }, 100)
+  //   })
+  // })
 
   test('should reject when validateStatus return false', () => {
     const resolveSpy = jest.fn((res: AxiosResponse) => {
