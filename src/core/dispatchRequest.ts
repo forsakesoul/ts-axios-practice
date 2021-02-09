@@ -3,7 +3,6 @@ import xhr from './xhr'
 import { buildURL, isAbsoluteURL, combineURL } from '../helps/url'
 import { flattenHeaders } from '../helps/headers'
 import transform from './transform'
-import { isAbsolute } from 'path'
 
 export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   throwIfCancellationRequested(config)

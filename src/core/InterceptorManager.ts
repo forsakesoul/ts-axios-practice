@@ -28,6 +28,7 @@ export default class InterceptorManager<T> {
     })
   }
 
+  // 移除，添加的拦截函数
   eject(id: number): void {
     if (this.interceptors[id]) {
       this.interceptors[id] = null
