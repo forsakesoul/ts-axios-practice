@@ -12,7 +12,7 @@ describe('headers', () => {
     jasmine.Ajax.uninstall()
   })
 
-  test('should use default common headers', () => {
+  test('should use default common headers', done => {
     const headers = axios.defaults.headers.common
 
     axios('/foo')
@@ -23,6 +23,7 @@ describe('headers', () => {
           expect(request.requestHeaders[key]).toEqual(headers[key])
         }
       }
+      done()
     })
   })
 })

@@ -10,13 +10,14 @@ describe('requests', () => {
     jasmine.Ajax.uninstall()
   })
 
-  test('should treat single string arg as url', () => {
+  test('should treat single string arg as url', done => {
     axios('/foo')
 
     // 返回 promise 结束调用
     return getAjaxRequest().then(request => {
       expect(request.url).toBe('/foo')
       expect(request.method).toBe('GET')
+      done()
     })
   })
 
@@ -37,10 +38,13 @@ describe('requests', () => {
   })
 
   test('should reject on network errors', done => {
-    const resolveSpy = jasmine.createSpy('resolve')
-    const rejectSpy = jasmine.createSpy('reject')
-
     jasmine.Ajax.uninstall()
+    const resolveSpy = jest.fn((res: AxiosResponse) => {
+      return res
+    })
+    const rejectSpy = jest.fn((e: AxiosError) => {
+      return e
+    })
 
     axios('/foo')
       .then(resolveSpy)
@@ -85,7 +89,7 @@ describe('requests', () => {
     })
   })
 
-  test('should reject when validateStatus return false', () => {
+  test('should reject when validateStatus return false', done => {
     const resolveSpy = jest.fn((res: AxiosResponse) => {
       return res
     })
@@ -107,6 +111,7 @@ describe('requests', () => {
       request.respondWith({
         status: 500
       })
+      done()
     })
 
     function next(reason: AxiosError | AxiosResponse) {
@@ -118,7 +123,7 @@ describe('requests', () => {
     }
   })
 
-  test('should resolve when validateStatus returns true', () => {
+  test('should resolve when validateStatus returns true', done => {
     const resolveSpy = jest.fn((res: AxiosResponse) => {
       return res
     })
@@ -140,6 +145,7 @@ describe('requests', () => {
       request.respondWith({
         status: 500
       })
+      done()
     })
 
     function next(res: AxiosError | AxiosResponse) {
@@ -236,7 +242,7 @@ describe('requests', () => {
     }, 100)
   })
 
-  test('should allow overriding Content-Type header case-insensitive', () => {
+  test('should allow overriding Content-Type header case-insensitive', done => {
     let response: AxiosResponse
 
     axios
@@ -252,6 +258,7 @@ describe('requests', () => {
 
     return getAjaxRequest().then(request => {
       expect(request.requestHeaders['Content-Type']).toBe('application/json;charset=utf-8')
+      done()
     })
   })
 })
