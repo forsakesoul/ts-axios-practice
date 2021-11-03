@@ -37,12 +37,8 @@ describe('requests', () => {
   })
 
   test('should reject on network errors', done => {
-    const resolveSpy = jest.fn((res: AxiosResponse) => {
-      return res
-    })
-    const rejectSpy = jest.fn((e: AxiosError) => {
-      return e
-    })
+    const resolveSpy = jasmine.createSpy('resolve')
+    const rejectSpy = jasmine.createSpy('reject')
 
     jasmine.Ajax.uninstall()
 
@@ -53,13 +49,12 @@ describe('requests', () => {
 
     // https://hpstream.github.io/ts-axios/chapter11/requests.html#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81%E7%BC%96%E5%86%99
     function next(reason: AxiosResponse | AxiosError) {
-      // 这块 reason 是 undefined
-      // expect(resolveSpy).not.toHaveBeenCalled()
-      // expect(rejectSpy).toHaveBeenCalled()
-      // expect(reason instanceof Error).toBeTruthy()
-      console.log(reason, '-----------')
-      // expect((reason as AxiosError).message).toBe('Network Error')
-      // expect(reason.request).toEqual(expect.any(XMLHttpRequest))
+      // TODO: 这块 reason 是 undefined
+      expect(resolveSpy).not.toHaveBeenCalled()
+      expect(rejectSpy).toHaveBeenCalled()
+      expect(reason instanceof Error).toBeTruthy()
+      expect((reason as AxiosError).message).toBe('Network Error')
+      expect(reason.request).toEqual(expect.any(XMLHttpRequest))
 
       jasmine.Ajax.install()
 
@@ -81,9 +76,10 @@ describe('requests', () => {
       request.eventBus.trigger('timeout')
 
       setTimeout(() => {
+        // TODO: error
         console.log(typeof err, Object.prototype.toString.call(err))
-        // expect(err instanceof Error).toBeTruthy()
-        // expect(err.message).toBe('Timeout of 2000 ms exceeded')
+        expect(err instanceof Error).toBeTruthy()
+        expect(err.message).toBe('Timeout of 2000 ms exceeded')
         done()
       }, 100)
     })
